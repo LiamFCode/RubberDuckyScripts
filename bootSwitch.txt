@@ -1,0 +1,57 @@
+REM Linux to Windows Boot Switch Automation
+REM DISCLAIMER: This script navigates your UEFI to switch boot drive. MANUALLY VALIDATE THE NAVIGATION. Write down the arrow key inputs, and check them within your UEFI, or an incorrect setting will be changed.
+
+REM #-------------------------------------------#       #---Configure---#
+DEFINE #HYPRLAND = FALSE
+DEFINE #SECUREBOOT = 0
+REM supported motherboards: gigabyte		plan to support: asus, msi, gigabyte, asrock, sapphire
+DEFINE #MOBO = gigabyte
+DEFINE #WINDOWSPASSWORD = 
+
+REM #-------------------------------------------#       #---Switch-Boot---#
+IF ( #HYPRLAND = TRUE ) THEN                
+	GUI t
+ELSE IF ( 1 = 1 ) THEN
+	CTRL ALT t
+END_IF
+
+STRING systemctl reboot --firmware-setup
+DELAY 120000
+
+IF ( #MOBO = gigabyte ) THEN
+	REM #-----# #---Switch-Boot-Order---#
+	RIGHTARROW
+	DELAY 50
+	RIGHTARROW
+	DELAY 50
+	RIGHTARROW
+	DELAY 50 
+	ENTER
+	DELAY 50
+	DOWNARROW
+	DELAY 50
+	ENTER
+	REM #-----# #---Secure-Boot---#
+	IF ( #SECUREBOOT = 0 ) THEN
+		DOWNARROW
+		DELAY 50
+		DOWNARROW
+	REM #-----# #---Save-&-Exit---#
+	RIGHTARROW
+	DELAY 50
+	ENTER
+	DELAY 50
+	RIGHTARROW
+	DELAY 50
+	ENTER
+ELSE IF TRUE THEN
+END_IF
+
+REM #-------------------------------------------#       #---Enter-Windows---#
+DELAY 300000
+SPACE
+DELAY 5000
+STRING #WINDOWSPASSWORD
+DELAY 500
+ENTER
+
